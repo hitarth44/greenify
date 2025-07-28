@@ -257,3 +257,11 @@ window.addEventListener("storage", (event) => {
 function closeThankYou() {
   document.getElementById("thankyou-modal").classList.add("hidden");
 }
+window.addEventListener("beforeunload", function () {
+  localStorage.removeItem("cartItems"); // Replace with your actual key if it's different
+});
+window.addEventListener("beforeunload", function () {
+  localStorage.removeItem("cartItems");
+  localStorage.removeItem("cartTotal");
+  localStorage.removeItem("cartCount");
+});
