@@ -38,3 +38,6 @@ git clone https://github.com/your-username/plant-store.git
 cd plant-store
 open index.html   # or just drag into your browser
 ```
+## Live Demo
+
+https://greenify-gamma.vercel.app/
