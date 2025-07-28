@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <title>Your Cart - Greenify</title>
+  </head>
+  <body>
+    <header class="header" id="header">
+      <nav class="nav container">
+        <a href="index.html" class="nav__logo">
+          <i class="ri-leaf-line nav__logo-icon"></i> Greenify
+        </a>
+
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="index.html" class="nav__link active-link">Home</a>
+            </li>
+            <li class="nav__item">
+              <a href="index.html#about" class="nav__link">About</a>
+            </li>
+            <li class="nav__item">
+              <a href="index.html#products" class="nav__link">Products</a>
+            </li>
+            <li class="nav__item">
+              <a href="index.html#faqs" class="nav__link">FAQs</a>
+            </li>
+            <li class="nav__item">
+              <a href="index.html#contact" class="nav__link">Contact Us</a>
+            </li>
+            <li class="nav__item">
+              <a href="cart.html" class="nav__link">Cart</a>
+            </li>
+          </ul>
+
+          <div class="nav__close" id="nav-close">
+            <i class="ri-close-line"></i>
+          </div>
+        </div>
+
+        <div class="nav__btns">
+          <i class="ri-moon-line change-theme" id="theme-button"></i>
+
+          <div class="nav__toggle" id="nav-toggle">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section class="product section container cart">
+      <h2 class="section__title-center">Your Cart</h2>
+      <div id="cart-items" class="product__container grid"></div>
+      <div id="cart-total" style="text-align: center; margin-top: 2rem"></div>
+    </section>
+    <div id="thankyou-modal" class="thankyou__overlay hidden">
+      <div class="thankyou__popup">
+        <h2>✅ Thank you for shopping!</h2>
+        <p>We hope to see you again soon 🌿</p>
+        <button onclick="closeThankYou()" class="button button--flex">
+          Close
+        </button>
+      </div>
+    </div>
+
+    <script src="cart.js" id="cart-script"></script>
+  </body>
+</html>
