@@ -101,8 +101,8 @@ const darkTheme = 'dark-theme'
 const iconTheme = 'ri-sun-line'
 
 // Previously selected topic (if user selected)
-const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon = localStorage.getItem('selected-icon')
+const selectedTheme = sessionStorage.getItem('selected-theme')
+const selectedIcon = sessionStorage.getItem('selected-icon')
 
 // We obtain the current theme that the interface has by validating the dark-theme class
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
@@ -121,8 +121,8 @@ themeButton.addEventListener('click', () => {
     document.body.classList.toggle(darkTheme)
     themeButton.classList.toggle(iconTheme)
     // We save the theme and the current icon that the user chose
-    localStorage.setItem('selected-theme', getCurrentTheme())
-    localStorage.setItem('selected-icon', getCurrentIcon())
+    sessionStorage.setItem('selected-theme', getCurrentTheme())
+    sessionStorage.setItem('selected-icon', getCurrentIcon())
 })
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
@@ -142,7 +142,7 @@ sr.reveal(`.about__data, .contact__form`,{origin: 'right'})
 sr.reveal(`.steps__card, .product__card, .questions__group, .footer`,{interval: 100})
 
 function addToCart(name, price, img) {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
     const existing = cart.find(item => item.name === name);
   
     if (existing) {
@@ -151,7 +151,7 @@ function addToCart(name, price, img) {
       cart.push({ name, price, img, quantity: 1 });
     }
   
-    localStorage.setItem('cart', JSON.stringify(cart));
+    sessionStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
     showToast(`${name} added to cart`);
   }
@@ -167,7 +167,7 @@ function addToCart(name, price, img) {
   }
 
   function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
     const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
     const badge = document.getElementById('cart-count');
   

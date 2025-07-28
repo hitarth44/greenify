@@ -101,8 +101,8 @@ const darkTheme = 'dark-theme'
 const iconTheme = 'ri-sun-line'
 
 // Previously selected topic (if user selected)
-const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon = localStorage.getItem('selected-icon')
+const selectedTheme = sessionStorage.getItem('selected-theme')
+const selectedIcon = sessionStorage.getItem('selected-icon')
 
 // We obtain the current theme that the interface has by validating the dark-theme class
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
@@ -121,12 +121,12 @@ themeButton.addEventListener('click', () => {
     document.body.classList.toggle(darkTheme)
     themeButton.classList.toggle(iconTheme)
     // We save the theme and the current icon that the user chose
-    localStorage.setItem('selected-theme', getCurrentTheme())
-    localStorage.setItem('selected-icon', getCurrentIcon())
+    sessionStorage.setItem('selected-theme', getCurrentTheme())
+    sessionStorage.setItem('selected-icon', getCurrentIcon())
 })
 
 function updateCartCount() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
   const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
   const badges = document.querySelectorAll('.cart__count');
   badges.forEach(b => {
@@ -135,7 +135,7 @@ function updateCartCount() {
 }
 
 function updateCartTotal() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
   const totalElem = document.getElementById("cart-total");
 
   if (!totalElem) return;
@@ -159,7 +159,7 @@ function updateCartTotal() {
 
 
 function buildCart() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
   const container = document.getElementById("cart-items");
   const totalElem = document.getElementById("cart-total");
   if (!container || !totalElem) return;
@@ -203,28 +203,28 @@ function buildCart() {
 }
 
 function updateQty(name, change) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
   cart = cart.map(item => {
     if (item.name === name) {
       item.quantity += change;
     }
     return item;
   }).filter(item => item.quantity > 0);
-  localStorage.setItem("cart", JSON.stringify(cart));
+  sessionStorage.setItem("cart", JSON.stringify(cart));
   buildCart();
   updateCartCount();
 }
 
 function removeItem(name) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
   cart = cart.filter(item => item.name !== name);
-  localStorage.setItem("cart", JSON.stringify(cart));
+  sessionStorage.setItem("cart", JSON.stringify(cart));
   buildCart();
   updateCartCount();
 }
 
 function proceedToCheckout() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
 
   if (cart.length === 0) {
     alert("🛒 Your cart is empty.");
@@ -235,7 +235,7 @@ function proceedToCheckout() {
   document.getElementById("thankyou-modal").classList.remove("hidden");
 
   // Clear cart and update UI
-  localStorage.removeItem("cart");
+  sessionStorage.removeItem("cart");
   buildCart();
   updateCartCount();
 }
@@ -258,10 +258,10 @@ function closeThankYou() {
   document.getElementById("thankyou-modal").classList.add("hidden");
 }
 window.addEventListener("beforeunload", function () {
-  localStorage.removeItem("cartItems"); // Replace with your actual key if it's different
+  sessionStorage.removeItem("cartItems"); // Replace with your actual key if it's different
 });
 window.addEventListener("beforeunload", function () {
-  localStorage.removeItem("cartItems");
-  localStorage.removeItem("cartTotal");
-  localStorage.removeItem("cartCount");
+  sessionStorage.removeItem("cartItems");
+  sessionStorage.removeItem("cartTotal");
+  sessionStorage.removeItem("cartCount");
 });
